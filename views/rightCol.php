@@ -22,6 +22,7 @@
 				cache: false
 				}).done(function(data) {
 		  		$("#newsContainer").html(data);
+		  		$(".switchPage").on("click", switchPage())
 			});
 	}
 // ---------------------------------------------------------- //	
@@ -68,17 +69,17 @@
 	
 	<!-- ------------------------------------------------------------------------ -->
 
-	<div id="newsPages1">
+	<!-- <div id="newsPages1">
 		<div class="switchPage" id="p1">1  </div>
 		<div class="switchPage" id="p2">2  </div>
-	</div>
+	</div> -->
 	<div id="newsLoadScreen">
 		<div id="newsContainer"></div>
 	</div>
 	
-	<div id="newsPages2">
+	<!-- <div id="newsPages2">
 		<div class="switchPage" id="p1">1  </div>
 		<div class="switchPage" id="p2">2  </div>
-	</div>
+	</div> -->
 	
 </div>
