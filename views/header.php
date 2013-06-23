@@ -31,7 +31,7 @@
 							<img class="navButtonUnderlight" id="underlight6" src="template/img/navButtonUnderlight.png" />
 						</div>
 					</div>
-					<div id="freeSpace"><img id="bgEye" src="template/img/bgEye.png" /></div>
+					<div id="freeSpace"><!-- <img id="bgEye" src="template/img/bgEye.png" /> --></div>
 				</div>
 			</div>
 			<div id="barRight"></div>

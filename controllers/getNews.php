@@ -5,8 +5,8 @@
 
 // Vars /////////////////////////////////////////////////////////////////////////////////////////////// //
 $page = $_POST['page'];
-//$page = $page-1;
-$pageOffset = $page*5;
+$page2 = $page-1;
+$pageOffset = $page2*5;
 
 class news {
 	public $id;
@@ -119,6 +119,87 @@ while($row1 = mysqli_fetch_array($result))
 	
 	
 	
+	
+	
+	$i = $page;
+	$iStart = $i;
+	
+		
+		
+		echo 	'<div id="newsPages1">
+					<div class="prevPage">&#171</div>';
+	
+	
+	
+	switch($i) {
+		case 1:
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			$i++;
+			while($i <= 5) {
+				echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			}
+			break;
+			
+			
+		case 2:
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			$i++;
+			while($i <= 5) {
+				echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+				$i++;
+			}
+			break;
+			
+			
+		case ($i != 1 && $i != 2 && $i != $pagesCount && $i != $pagesCount-1):
+			$i = $i-2;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo 		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			break;
+			
+			
+		case ($i == $pagesCount-1):
+			$i = $i-3;
+			while($i < $pagesCount-1) {
+				echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+				$i++;
+			}
+			echo 			'<div class="switchPage" id="p' . $i . '" style="border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			break;
+			
+			
+		case ($i == $pagesCount):
+			$i = $i-4;
+			while($i < $pagesCount) {
+				echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+				$i++;
+			}
+			echo 			'<div class="switchPage" id="p' . $i . '" style="border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			break;		
+	}
+
+
+	echo 		'<div class="nextPage">&#187</div>
+				</div>';
+	
+	
+	
+	
+	
+	
 	foreach($newsList as $news) {
 		echo 	'<div class="newsBox" id="news' . $news->id . '">
 					<div class="newsImage"><img src="' . $news->thumbPhotoUrl . '" width="200" height="200" /></div>
@@ -138,7 +219,7 @@ while($row1 = mysqli_fetch_array($result))
 	
 		
 		
-		echo 	'<div id="newsPages1">
+		echo 	'<div id="newsPages2">
 					<div class="prevPage">&#171</div>';
 	
 	

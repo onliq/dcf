@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<script type="text/javascript">
-	$(document).ready(function(){
-		$(".switchPage").click(function(){
-			alert("asd");
-			var id = $(this).attr("id");
-			window.location.hash = id;
-		});	
-	})
-</script>
+		
 		<!-- Links ------------------------------------------------------------------ -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
