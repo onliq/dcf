@@ -23,7 +23,31 @@ $newsList = array();
 
 $conn=mysqli_connect("serwer1309748.home.pl","serwer1309748_03","9!c3Q9","serwer1309748_03");
 $conn2=mysqli_connect("serwer1309748.home.pl","serwer1309748_03","9!c3Q9","serwer1309748_03");
+$conn3=mysqli_connect("serwer1309748.home.pl","serwer1309748_03","9!c3Q9","serwer1309748_03");
 // //////////////////////////////////////////////////////////////////////////////////////////////////// //
+
+
+
+
+
+// Count news ///////////////////////////////////////////////////////////////////////////////////////// //
+if (mysqli_connect_errno())
+	{
+ 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	}
+
+
+
+$result = mysqli_query($conn,"SELECT COUNT(*) FROM news ");
+
+while($row1 = mysqli_fetch_array($result))
+	{
+		$newsCount = $row1['COUNT(*)'];
+		$buttonsCount = $newsCount/5;
+		$buttonsCount = round($buttonsCount, 0, PHP_ROUND_HALF_DOWN);
+	}
+// //////////////////////////////////////////////////////////////////////////////////////////////////// //
+
 
 
 
@@ -81,6 +105,7 @@ while($row1 = mysqli_fetch_array($result))
 		  }
 		
 	}
+	mysqli_close($conn3);
 	mysqli_close($conn2);
 	mysqli_close($conn);
 	// //////////////////////////////////////////////////////////////////////////////////////////////////// //
@@ -91,6 +116,19 @@ while($row1 = mysqli_fetch_array($result))
 	
 	
 	// Output ///////////////////////////////////////////////////////////////////////////////////////////// //
+	
+	
+	$i = $page;
+	
+		echo 	'<div id="newsPages1">
+					<div class="prevPage>&#171</div>"';
+	
+	while($i <= $buttonsCount) {	
+		echo		'<div class="switchPage" id="p1">1</div>';
+	}
+	
+		echo 		'<div class="nextPage">&#187</div>
+				</div>';
 	
 	foreach($newsList as $news) {
 		echo 	'<div class="newsBox" id="news' . $news->id . '">

@@ -597,7 +597,7 @@ body {
 /* News ===================================================================== */
 #newsLoadScreen {
 	z-index:10;
-	background-color: Gray;
+	background-color: ;
 }
 
 #newsContainer {
