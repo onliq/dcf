@@ -3,12 +3,19 @@
 
 <div id="loginForm">
 		<form action="login.php" method="post">
-			Email: <input type="text" class="fromTextbox" name="fname">
+			Email:
+			<br> 
+			<input type="text" class="fromTextbox" id="fname" name="fname">
 			<br>
-			Password: <input type="text" class="fromTextbox" name="age">
+			Hasło:
+			<br>  
+			<input type="password" class="fromTextbox" id="tbPassword" name="pass1">
 			<br>
-			Confirm Password: <input type="text" class="fromTextbox" name="age">
+			Potwierdź hasło: 
+			<br> 
+			<input type="password" class="fromTextbox" id="tbPassword2" name ="pass2">
 			<br>
 			<input type="submit" value="Zaloguj">
 		</form>
 </div>
+
