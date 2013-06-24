@@ -3,7 +3,7 @@
 	<head>
 		
 		<!-- Include links ---------------------------------------------------------- -->
-		<?php include 'views/links.php'; ?>
+		<?php include 'include/links.php'; ?>
 		<!-- ------------------------------------------------------------------------ -->
 		
 
@@ -12,8 +12,9 @@
 	
 	
 	<body>
+		
 		<!-- Include header --------------------------------------------------------- -->
-		<?php include 'views/header.php'; ?>
+		<?php include 'include/header.php'; ?>
 		<!-- ------------------------------------------------------------------------ -->
 		<div id="grid">
 			
@@ -30,7 +31,7 @@
 				<div class="newsContainer">
 					<div class="news">
 						<div class="newsHeadPhoto">
-							
+							<img src="photos/slider2.png" />
 						</div>
 					</div>
 				</div>
@@ -39,7 +40,7 @@
 			
 			
 			<!-- Include footer --------------------------------------------------------- -->
-			<?php include 'views/footer.php'; ?>
+			<?php include 'include/footer.php'; ?>
 			<!-- ------------------------------------------------------------------------ -->
 		</div>
 	</body>

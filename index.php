@@ -2,6 +2,7 @@
 <html>
 	<head>
 		
+<<<<<<< HEAD
 		<!-- Links ------------------------------------------------------------------ -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -13,34 +14,171 @@
 		<!-- ------------------------------------------------------------------------ -->
 		
 		
+=======
+		<!-- Include links ---------------------------------------------------------- -->
+		<?php include 'include/links.php'; ?>
+		<!-- ------------------------------------------------------------------------ -->
+		
+		
+		
+		
+		<!-- Functions -------------------------------------------------------------- -->
+		<script type="text/javascript">
+		// Check hashtag -------------------------------------------- //
+			function getHashtag(){
+				if(window.location.hash) {
+		      		var hash = window.location.hash.substring(1);
+		  		} else {
+		  			var hash = 1;
+		  		}
+		  		return hash;
+			}	
+		// ---------------------------------------------------------- //	
+		
+		// Load news ------------------------------------------------ //
+			function loadNews(page){
+				$.ajax({
+						url: "controllers/getNews.php",
+						type: "POST",
+						data: "page=" + page,
+						cache: false
+						}).done(function(data) {
+				  		$(".newsBoxContainer").html(data);
+				  		$(".switchPage").on("click", switchPage())
+					});
+			}
+		// ---------------------------------------------------------- //	
+		
+		// Switch page ---------------------------------------------- //
+			function switchPage(){
+				$(".switchPage").click(function(){
+					var page = $(this).attr("id");
+					page = page.substr(1,3);
+					window.location.hash = page;
+					loadNews(page);
+				});
+				var hash = getHashtag();
+				$(".nextPage").click(function(){
+					var lastPage = $(this).attr("id");
+					lastPage = lastPage.substr(9,3);
+					var page = parseInt(hash);
+					if (page == lastPage) {
+						
+					} else {
+						page++;
+						window.location.hash = page;
+						loadNews(page);
+					}
+				});
+				$(".prevPage").click(function(){
+					var page = parseInt(hash);
+					if(page > 1) {
+					page--;
+					window.location.hash = page;
+					loadNews(page);
+					} else {};
+				});
+			}
+		// ---------------------------------------------------------- //	
+		
+		// Login ---------------------------------------------------- //
+			function grayout() {
+				$('#grayout').css({"display":"none"});
+				$('#loginForm').css({"display":"none"});
+				
+				$("#loginButton").click(function(){
+					$('#grayout').css({"display":""});
+					$('#loginForm').css({"display":""});
+				});
+				
+				$("#grayout").click(function(){
+					$('#grayout').css({"display":"none"});
+					$('#loginForm').css({"display":"none"});
+				});	
+			}
+		// ---------------------------------------------------------- //
+		</script>
+		<!-- ------------------------------------------------------------------------ -->	
+		
+		
+		
+		
+		<!-- Page load -------------------------------------------------------------- -->
+		<script type="text/javascript">
+			$(document).ready(function(){
+				grayout();
+				
+				var checkPage = getHashtag();
+				if (checkPage > $("#nextPage").attr("id")) {
+					window.location.hash = page;
+					loadNews(page);
+				} else {
+					window.location.hash = 1;
+					loadNews(1);
+					switchPage();
+				}
+			})
+		</script>
+		<!-- ------------------------------------------------------------------------ -->	
+		
+		
+		
+>>>>>>> 30beccc7bdbcce3ca973ebb9d0243a9b7f0908a1
 		
 	</head>
 	
 	
 	<body>
 		<!-- Include userStatus ----------------------------------------------------- -->
-		<?php include 'views/userStatus.php'; ?>
+		<?php include 'include/userStatus.php'; ?>
+		<!-- ------------------------------------------------------------------------ -->
+		<!-- Include loginForm ------------------------------------------------------ -->
+		<?php include 'include/loginForm.php'; ?>
 		<!-- ------------------------------------------------------------------------ -->
 		<!-- Include header --------------------------------------------------------- -->
-		<?php include 'views/header.php'; ?>
+		<?php include 'include/header.php'; ?>
 		<!-- ------------------------------------------------------------------------ -->
 		<div id="grid">
-			<!-- Include left column ---------------------------------------------------- -->
-			<?php include 'views/leftCol.php'; ?>
+			
+			
+			<div id="leftCol">
+				<!-- <div id="leftMenu">
+					<img src="template/img/leftMenu.png" />
+				</div> -->
+			</div>
+			
+
+		
+		<div id="rightCol">
+			
+			<!-- Include Coin Slider ---------------------------------------------------- -->
+			<?php include 'include/coinSlider.php'; ?>
+			
 			<!-- ------------------------------------------------------------------------ -->
-			<!-- Include right column --------------------------------------------------- -->
-			<?php include 'views/rightCol.php'; ?>
-			<!-- ------------------------------------------------------------------------ -->
+		
+			<!-- <div id="newsPages1">
+				<div class="switchPage" id="p1">1  </div>
+				<div class="switchPage" id="p2">2  </div>
+			</div> -->
+			<div id="newsLoadScreen">
+				<div class="newsBoxContainer"></div>
+			</div>
+			
+			<!-- <div id="newsPages2">
+				<div class="switchPage" id="p1">1  </div>
+				<div class="switchPage" id="p2">2  </div>
+			</div> -->
+			
+		</div>
 			<!-- Include footer --------------------------------------------------------- -->
-			<?php include 'views/footer.php'; ?>
+			<?php include 'include/footer.php'; ?>
 			<!-- ------------------------------------------------------------------------ -->
 		</div>
-		<!-- Include loginForm ------------------------------------------------------ -->
-		<?php include 'views/loginForm.php'; ?>
-		<!-- ------------------------------------------------------------------------ -->
+		
 	</body>
 	
 </html>
+<<<<<<< HEAD
 
 <!-- Login -->
 <script type="text/javascript">
@@ -65,3 +203,5 @@
 	});
 </script>
 <!-- -->
+=======
+>>>>>>> 30beccc7bdbcce3ca973ebb9d0243a9b7f0908a1
