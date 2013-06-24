@@ -1,20 +1,25 @@
 <script type="text/javascript">
-		// Login ---------------------------------------------------- //
-			function grayout() {
-				$('#grayout').css({"display":"none"});
-				$('#loginForm').css({"display":"none"});
-				
-				$("#loginButton").click(function(){
-					$('#grayout').css({"display":""});
-					$('#loginForm').css({"display":""});
-				});
-				
-				$("#grayout").click(function(){
-					$('#grayout').css({"display":"none"});
-					$('#loginForm').css({"display":"none"});
-				});	
-			}
-		// ---------------------------------------------------------- //
+// Login ---------------------------------------------------- //
+function grayout() {
+	
+		$('#grayout').css({"display":"none"});
+		$('#loginForm').css({"display":"none"});
+		
+		$("#loginButton").click(function(){
+			$('#grayout').css({"display":""});
+			$('#loginForm').css({"display":""});
+		});
+		
+		$("#grayout").click(function(){
+			$('#grayout').css({"display":"none"});
+			$('#loginForm').css({"display":"none"});
+		});
+		
+		$('#fname').watermark("Wpisz login");
+		$('#tbPassword').watermark("Wpisz hasło");
+		$('#tbPassword2').watermark("Potwierdź hasło");
+}
+                    // ---------------------------------------------------------- //
 </script>
 
 <div id="userTopBar">
