@@ -25,7 +25,7 @@
 		// Load news ------------------------------------------------ //
 			function loadNews(page){
 				$.ajax({
-						url: "controllers/getNews.php",
+						url: "controllers/getNewsList.php",
 						type: "POST",
 						data: "page=" + page,
 						cache: false

@@ -34,5 +34,17 @@
 				Fusce pharetra varius consequat.
 			</span>
 		</a>
+		<a href="imgN_url">
+			<img src='photos/slider3.png' >
+			<span>
+				Sit amet varius consequat.
+			</span>
+		</a>
+		<a href="imgN_url">
+			<img src='photos/slider4.png' >
+			<span>
+				Fusce pharetra varius consequat.
+			</span>
+		</a>
 	</div>
 </div>
