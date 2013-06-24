@@ -600,7 +600,7 @@ body {
 	background-color: ;
 }
 
-#newsContainer {
+.newsBoxContainer {
 	width: 749px;
 	height: auto;
 	background-color: rgba(255,255,255,0.8);
@@ -621,7 +621,7 @@ body {
 	/*background-color: Red;*/
 }
 
-.newsTitle {
+.newsBoxTitle {
 	width: 511px;
 	/*background-color: Green;*/
 	display: block;
@@ -632,7 +632,7 @@ body {
 	font-weight: ;
 }
 
-.newsInfo {
+.newsBoxInfo {
 	width: 511px;
 	/*background-color: Blue;*/
 	display: block;
@@ -642,7 +642,7 @@ body {
 	font-family: "Myriad Pro";
 }
 
-.newsHeader {
+.newsBoxHeader {
 	width: 506px;
 	min-height: 85px;
 	height: auto;
@@ -654,7 +654,7 @@ body {
 	font-family: "Arial";
 }
 
-.newsImage {
+.newsBoxImage {
 	width: 200px;
 	height: 200px;
 	/*background-color: Black;*/
@@ -662,7 +662,7 @@ body {
 	/*background-color: Gray;*/
 }
 
-.newsMore {
+.newsBoxMore {
 	width: 511px;
 	padding-left: 4px;
 	font-size: 9pt;
@@ -671,7 +671,7 @@ body {
 	/*background-color: Yellow;*/
 }
 
-.newsMargin {
+.newsBoxMargin {
 	width: 723px;
 	height: 4px;
 	margin-top: 14px;
@@ -714,13 +714,12 @@ body {
 	text-align: center;
 	padding-top: 3px;
 }
-/* ========================================================================== */
 
-/* News 2 =================================================================== */
-/*#newsContainer2 {
+.newsContainer {
 	width: 749px;
-	height: 500px;
-	margin-top: 40px;
+	height: auto;
+	background-color: rgba(255,255,255,0.8);
+	margin-top: 0px;
 	margin-left: -3px;
 	padding-top: 1px;
 	border-left-style: solid;
@@ -729,23 +728,14 @@ body {
 }
 
 .news {
-	width: 200px;	
-	height: 280px;
-	float: left;
+	width: 723px;
+	height: auto;
 	margin-left: 27px;
-	padding-right: 22px;
-	padding-bottom: 15px;
 }
 
-.newsImg {
-	width: 200px;
-	height: 200px;
+.newsHeadPhoto {
+	width: 722px;
+	height: 268px;
+	background-color: Gray;
 }
-
-.nTitle {
-	width: 195px;
-	height: 80px;
-	padding-left: 5px;
-	font-size: 13pt;
-}*/
 /* ========================================================================== */

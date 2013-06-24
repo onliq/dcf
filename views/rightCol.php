@@ -21,7 +21,7 @@
 				data: "page=" + page,
 				cache: false
 				}).done(function(data) {
-		  		$("#newsContainer").html(data);
+		  		$(".newsBoxContainer").html(data);
 		  		$(".switchPage").on("click", switchPage())
 			});
 	}
@@ -34,6 +34,27 @@
 			page = page.substr(1,3);
 			window.location.hash = page;
 			loadNews(page);
+		});
+		var hash = getHashtag();
+		$(".nextPage").click(function(){
+			var lastPage = $(this).attr("id");
+			lastPage = lastPage.substr(9,3);
+			var page = parseInt(hash);
+			if (page == lastPage) {
+				
+			} else {
+				page++;
+				window.location.hash = page;
+				loadNews(page);
+			}
+		});
+		$(".prevPage").click(function(){
+			var page = parseInt(hash);
+			if(page > 1) {
+			page--;
+			window.location.hash = page;
+			loadNews(page);
+			} else {};
 		});
 	}
 // ---------------------------------------------------------- //	
@@ -50,8 +71,15 @@
 <!-- Page load -------------------------------------------------------------- -->
 <script type="text/javascript">
 	$(document).ready(function(){
-		loadNews(getHashtag());
-		switchPage();
+		var checkPage = getHashtag();
+		if (checkPage > $("#nextPage").attr("id")) {
+			window.location.hash = page;
+			loadNews(page);
+		} else {
+			window.location.hash = 1;
+			loadNews(1);
+			switchPage();
+		}
 	})
 </script>
 <!-- ------------------------------------------------------------------------ -->	
@@ -74,7 +102,7 @@
 		<div class="switchPage" id="p2">2  </div>
 	</div> -->
 	<div id="newsLoadScreen">
-		<div id="newsContainer"></div>
+		<div class="newsBoxContainer"></div>
 	</div>
 	
 	<!-- <div id="newsPages2">

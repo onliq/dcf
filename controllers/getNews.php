@@ -44,9 +44,11 @@ while($row1 = mysqli_fetch_array($result))
 	{
 		$newsCount = $row1['COUNT(*)'];
 		$pagesCount = $newsCount/5;
-		$pagesCount = round($pagesCount, 0, PHP_ROUND_HALF_DOWN);
+		$pagesCount = ceil($pagesCount);
 	}
 // //////////////////////////////////////////////////////////////////////////////////////////////////// //
+
+
 
 
 
@@ -132,8 +134,8 @@ while($row1 = mysqli_fetch_array($result))
 	
 	
 	switch($i) {
-		case 1:
-			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+		case ($i == 1 && $pagesCount > 4):
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
 			$i++;
 			while($i <= 5) {
 				echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
@@ -142,11 +144,47 @@ while($row1 = mysqli_fetch_array($result))
 			break;
 			
 			
-		case 2:
+		case ($i == 1 && $pagesCount == 1):
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			break;
+			
+			
+		case ($i == 1 && $pagesCount == 2):
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			break;
+			
+			
+		case ($i == 1 && $pagesCount == 3):
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			break;	
+				
+				
+		case ($i == 1 && $pagesCount == 4):
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			break;	
+			
+			
+		case ($i == 2 && $pagesCount > 4):
 			$i = 1;
 			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
 			$i++;
-			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
 			$i++;
 			while($i <= 5) {
 				echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
@@ -155,13 +193,77 @@ while($row1 = mysqli_fetch_array($result))
 			break;
 			
 			
-		case ($i != 1 && $i != 2 && $i != $pagesCount && $i != $pagesCount-1):
+		case ($i == 2 && $pagesCount == 2):
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			break;	
+			
+			
+		case ($i == 2 && $pagesCount == 3):
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			break;	
+			
+		case ($i == 2 && $pagesCount == 4):
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			break;
+			
+		case ($i == 3 && $pagesCount == 3):
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			break;		
+			
+		case ($i == 3 && $pagesCount == 4):
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			break;	
+			
+			
+		case ($i == 3 && $pagesCount > 4):
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			break;		
+			
+			
+			
+		case ($i != 1 && $i != 2 && $i != $pagesCount && $i != $pagesCount-1 && $i < $pagesCount && $i < $pagesCount-1):
 			$i = $i-2;
 			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
 			$i++;
 			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
 			$i++;
-			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
 			$i++;
 			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
 			$i++;
@@ -169,13 +271,13 @@ while($row1 = mysqli_fetch_array($result))
 			break;
 			
 			
-		case ($i == $pagesCount-1):
+		case ($i == $pagesCount-1 && $i < $pagesCount):
 			$i = $i-3;
 			while($i < $pagesCount-1) {
 				echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
 				$i++;
 			}
-			echo 			'<div class="switchPage" id="p' . $i . '" style="border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			echo 			'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
 			$i++;
 			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
 			break;
@@ -187,12 +289,12 @@ while($row1 = mysqli_fetch_array($result))
 				echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
 				$i++;
 			}
-			echo 			'<div class="switchPage" id="p' . $i . '" style="border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			echo 			'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
 			break;		
 	}
 
 
-	echo 		'<div class="nextPage">&#187</div>
+	echo 		'<div class="nextPage" id="lastPage=' . $pagesCount . '">&#187</div>
 				</div>';
 	
 	
@@ -202,12 +304,12 @@ while($row1 = mysqli_fetch_array($result))
 	
 	foreach($newsList as $news) {
 		echo 	'<div class="newsBox" id="news' . $news->id . '">
-					<div class="newsImage"><img src="' . $news->thumbPhotoUrl . '" width="200" height="200" /></div>
-					<div class="newsTitle">' . $news->title . '</div>
-					<div class="newsInfo">' . $news->date . '  ' . $news->category . '</div>
-					<div class="newsHeader">' . $news->header . '</div>
-					<div class="newsMore">+Wiecej...</div>
-					<div class="newsMargin"></div>
+					<div class="newsBoxImage"><img src="' . $news->thumbPhotoUrl . '" width="200" height="200" /></div>
+					<div class="newsBoxTitle">' . $news->title . '</div>
+					<div class="newsBoxInfo">' . $news->date . '  ' . $news->category . '</div>
+					<div class="newsBoxHeader">' . $news->header . '</div>
+					<div class="newsBoxMore">+Wiecej...</div>
+					<div class="newsBoxMargin"></div>
 				</div>';
 	}
 	
@@ -225,8 +327,8 @@ while($row1 = mysqli_fetch_array($result))
 	
 	
 	switch($i) {
-		case 1:
-			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+		case ($i == 1 && $pagesCount > 4):
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
 			$i++;
 			while($i <= 5) {
 				echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
@@ -235,11 +337,47 @@ while($row1 = mysqli_fetch_array($result))
 			break;
 			
 			
-		case 2:
+		case ($i == 1 && $pagesCount == 1):
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			break;
+			
+			
+		case ($i == 1 && $pagesCount == 2):
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			break;
+			
+			
+		case ($i == 1 && $pagesCount == 3):
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			break;	
+				
+				
+		case ($i == 1 && $pagesCount == 4):
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			break;	
+			
+			
+		case ($i == 2 && $pagesCount > 4):
 			$i = 1;
 			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
 			$i++;
-			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
 			$i++;
 			while($i <= 5) {
 				echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
@@ -248,13 +386,77 @@ while($row1 = mysqli_fetch_array($result))
 			break;
 			
 			
-		case ($i != 1 && $i != 2 && $i != $pagesCount && $i != $pagesCount-1):
+		case ($i == 2 && $pagesCount == 2):
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			break;	
+			
+			
+		case ($i == 2 && $pagesCount == 3):
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			break;	
+			
+		case ($i == 2 && $pagesCount == 4):
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			break;
+			
+		case ($i == 3 && $pagesCount == 3):
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			break;		
+			
+		case ($i == 3 && $pagesCount == 4):
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			break;	
+			
+			
+		case ($i == 3 && $pagesCount > 4):
+			$i = 1;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			$i++;
+			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
+			break;		
+			
+			
+			
+		case ($i != 1 && $i != 2 && $i != $pagesCount && $i != $pagesCount-1 && $i < $pagesCount && $i < $pagesCount-1):
 			$i = $i-2;
 			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
 			$i++;
 			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
 			$i++;
-			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			echo		'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
 			$i++;
 			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
 			$i++;
@@ -262,13 +464,13 @@ while($row1 = mysqli_fetch_array($result))
 			break;
 			
 			
-		case ($i == $pagesCount-1):
+		case ($i == $pagesCount-1 && $i < $pagesCount):
 			$i = $i-3;
 			while($i < $pagesCount-1) {
 				echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
 				$i++;
 			}
-			echo 			'<div class="switchPage" id="p' . $i . '" style="border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			echo 			'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
 			$i++;
 			echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
 			break;
@@ -280,12 +482,12 @@ while($row1 = mysqli_fetch_array($result))
 				echo		'<div class="switchPage" id="p' . $i . '">' . $i . '</div>';
 				$i++;
 			}
-			echo 			'<div class="switchPage" id="p' . $i . '" style="border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
+			echo 			'<div class="switchPage" id="p' . $i . '" style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #d61180;">' . $i . '</div>';
 			break;		
 	}
 
 
-	echo 		'<div class="nextPage">&#187</div>
+	echo 		'<div class="nextPage" id="lastPage=' . $pagesCount . '">&#187</div>
 				</div>';
 	
 	

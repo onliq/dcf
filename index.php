@@ -10,22 +10,7 @@
 		<link rel="stylesheet" href="template/coin-slider-styles.css" type="text/css" />
 		<!-- ------------------------------------------------------------------------ -->
 		
-		<!-- Navigation buttons animation (old) ------------------------------------- -->
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$(".navButtonUnderlight").hide();
-				// $(".navButton").hover(function(){
-					// // $(".navButtonUnderlight").hide();
-					// var id = $(this).children(".navButtonUnderlight").attr("id");
-					// $("#" + id).stop(true, false).fadeIn(200);
-				// },
-				// function(){
-					// var id = $(this).children(".navButtonUnderlight").attr("id");
-					// $("#" + id).stop(true, false).fadeOut();
-				// });
-			});
-		</script>
-		<!-- ------------------------------------------------------------------------ -->
+
 		
 	</head>
 	
