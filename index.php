@@ -31,6 +31,9 @@
 	
 	
 	<body>
+		<!-- Include userStatus ----------------------------------------------------- -->
+		<?php include 'views/userStatus.php'; ?>
+		<!-- ------------------------------------------------------------------------ -->
 		<!-- Include header --------------------------------------------------------- -->
 		<?php include 'views/header.php'; ?>
 		<!-- ------------------------------------------------------------------------ -->
@@ -45,7 +48,31 @@
 			<?php include 'views/footer.php'; ?>
 			<!-- ------------------------------------------------------------------------ -->
 		</div>
+		<!-- Include loginForm ------------------------------------------------------ -->
+		<?php include 'views/loginForm.php'; ?>
+		<!-- ------------------------------------------------------------------------ -->
 	</body>
 	
 </html>
 
+<!-- Login -->
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+		$('#grayout').css({"display":"none"});
+		$('#loginForm').css({"display":"none"});
+		
+		$("#loginButton").click(function(){
+			$('#grayout').css({"display":""});
+			$('#loginForm').css({"display":""});
+		});
+		
+		$("#grayout").click(function(){
+			$('#grayout').css({"display":"none"});
+			$('#loginForm').css({"display":"none"});
+		});
+		
+	});
+</script>
+<!-- -->
