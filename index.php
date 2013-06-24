@@ -67,23 +67,6 @@
 				});
 			}
 		// ---------------------------------------------------------- //	
-		
-		// Login ---------------------------------------------------- //
-			function grayout() {
-				$('#grayout').css({"display":"none"});
-				$('#loginForm').css({"display":"none"});
-				
-				$("#loginButton").click(function(){
-					$('#grayout').css({"display":""});
-					$('#loginForm').css({"display":""});
-				});
-				
-				$("#grayout").click(function(){
-					$('#grayout').css({"display":"none"});
-					$('#loginForm').css({"display":"none"});
-				});	
-			}
-		// ---------------------------------------------------------- //
 		</script>
 		<!-- ------------------------------------------------------------------------ -->	
 		
