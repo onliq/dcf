@@ -796,7 +796,7 @@ body {
 	background: white;
 	border: 1px solid black;
 	opacity: 0.95;
-	width: 300px;
+	width: 350px;
 	height: 300px;
 	left: 50%;
 	margin-left: -200px;
@@ -804,7 +804,25 @@ body {
 	z-index: 3;
 	padding-left: 10px;
 	padding-top: 5px;
+	overflow: hidden;
 }
+
+#loginForm_left{
+	width: 200px;
+    float:left; 
+}
+
+#loginForm_right{
+	float:left; 
+	background-image: url(img/bgEye.png);
+	background-repeat:no-repeat;
+	background-position: center bottom;
+	/*background-size: contain;*/
+	background-size: 150px 150px;
+	height: 220px; 
+	width: 150px;
+}
+
 /* ========================================================================== */
 /* Form   =================================================================== */
 .formInfo{

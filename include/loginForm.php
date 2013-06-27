@@ -1,9 +1,10 @@
 <div id="grayout">
 </div>
 <div id="loginForm">
+	<div id="loginForm_left">
 		<form id="logValForm" method="post">
 			<p class="formLabel">Email:</p>
-			<input type="email" class="formTextbox" id="fname" name="fname" >
+			<input type="text" class="formTextbox" id="fname" name="fname" >
 			<br>
 				<a class="formInfo" id="fname_label"></a>
 			<br>
@@ -19,26 +20,66 @@
 			<br>
 			<input type="submit" value="Zaloguj" class="formButton">
 		</form>
+	</div>
+	
+	<div id="loginForm_right">
+	</div>
 </div>
 
 
 <script>
+
+jQuery.validator.addMethod("customEmail", function(value, element) {
+        return this.optional(element) || value.match(/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/);
+    }, "Zły format adresu email!");
+
+
+jQuery.validator.addMethod("checkUser", function(value, element) {
+	var em = $('#fname').val();
+	var user = null;
+	
+	$.ajax({
+        url: "controllers/checkUser.php",
+        type: 'post',
+        data: {email : em},
+        dataType: 'html',
+        async: false,
+        success: function(data) {
+            user = data;
+        } 
+     });
+  return this.optional(element) || value != user;
+}, "Ten adres email jest już używany!");
+
 var validate = $("#logValForm").validate({
 	errorPlacement: function(error, element) {
-	    if (element.attr("name") == "fname" ){ 
-	        $("#fname_label").html( error );
-	    }
-	    else if (element.attr("name") == "tbPassword" ){ 
-	    	$("#tbPassword_label").html( error );
-	    }
-	    else if (element.attr("name") == "tbPassword2" ){ 
-	    	$("#tbPassword2_label").html( error );
-	    }
+		
+	    // if (element.attr("name") == "fname" ){ 
+	        // $("#fname_label").html( error );
+	    // }
+	    // else if (element.attr("name") == "tbPassword" ){ 
+	    	// $("#tbPassword_label").html( error );
+	    // }
+	    // else if (element.attr("name") == "tbPassword2" ){ 
+	    	// $("#tbPassword2_label").html( error );
+	    // }
+	    var l = element.attr("name");
+	    l='#'+l+"_label";
+	    $(l).html( error );
+	        
+	},
+	success: function(label) {
+		
+	    var l = label.attr("for");
+	    l='#'+l+"_label";
+	    $(l).html( "Ok" );
+	    
 	},
 	rules: {
 		fname: {
 			required: true,
-			email: true
+			customEmail: true,
+			checkUser: true
 		},
 		tbPassword: {
 			required: true,
@@ -52,7 +93,7 @@ var validate = $("#logValForm").validate({
 	 messages: {
 		fname: {
 			required: "Pole email jest puste!",
-			email: "Zły format adresu email!",
+			customEmail: "Zły format adresu email!",
 		},
 		tbPassword: {
 			required: "Pole hasło jest puste!",
@@ -66,37 +107,39 @@ var validate = $("#logValForm").validate({
 });
 
 
-$('.formTextbox').change(function() {
-	if( $('#fname').valid()==true )
-		{
-			$('#fname_label').html("Ok");
-			$('#fname').css("border","1px solid green");
-		}
-	else
-		{
-			$('#fname').css("border","1px solid red");
-		}
-		
-	if( $('#tbPassword').valid()==true )
-		{
-			$('#tbPassword_label').html("Ok");
-			$('#tbPassword').css("border","1px solid green");
-		}
-	else
-		{
-			$('#tbPassword').css("border","1px solid red");
-		}
-		
-	if( $('#tbPassword2').valid()==true )
-		{
-			$('#tbPassword2_label').html("Ok");
-			$('#tbPassword2').css("border","1px solid green");
-		}
-	else
-		{
-			$('#tbPassword2').css("border","1px solid red");
-		}
-});
+// $('.formTextbox').on("input", function() {
+// 	
+	// if( $('#fname').valid()==true )
+		// {
+			// $('#fname_label').html("Ok");
+			// $('#fname').css("border","1px solid green");
+		// }
+	// else
+		// {
+			// $('#fname').css("border","1px solid red");
+		// }
+// 		
+	// if( $('#tbPassword').valid()==true )
+		// {
+			// $('#tbPassword_label').html("Ok");
+			// $('#tbPassword').css("border","1px solid green");
+		// }
+	// else
+		// {
+			// $('#tbPassword').css("border","1px solid red");
+		// }
+// 		
+	// if( $('#tbPassword2').valid()==true )
+		// {
+			// $('#tbPassword2_label').html("Ok");
+			// $('#tbPassword2').css("border","1px solid green");
+		// }
+	// else
+		// {
+			// $('#tbPassword2').css("border","1px solid red");
+		// }
+// });
+
 
 function resForm(){
 	validate.resetForm();
