@@ -87,6 +87,7 @@
 					loadNews(1);
 					switchPage();
 				}
+				$("#datePicker").DatePickerShow();
 			})
 		</script>
 		<!-- ------------------------------------------------------------------------ -->	
@@ -111,9 +112,7 @@
 			
 			
 			<div id="leftCol">
-				<!-- <div id="leftMenu">
-					<img src="template/img/leftMenu.png" />
-				</div> -->
+				<div id="datePicker"></div>
 			</div>
 			
 

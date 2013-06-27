@@ -11,7 +11,7 @@
 								<img class="navButtonBackground" src="template/img/buttons2/aktualnosciButton.png" />
 							</div>
 						</a>
-						<a href="">
+						<a href="schedule.php">
 							<div class="navButton">
 								<img class="navButtonBackground" src="template/img/buttons2/studioButton.png" />
 							</div>

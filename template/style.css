@@ -506,7 +506,7 @@ body {
 /* Navigation buttons ======================================================= */
 #navButtons {
 	position: absolute;
-	z-index: 2;
+	z-index: 0;
 	float: left;
 	width: auto;
 	height: 45px;
@@ -700,9 +700,9 @@ body {
 }
 
 .newsContainer {
-	width: 749px;
+	width: 750px;
 	height: auto;
-	background-color: rgba(255,255,255,0.8);
+	/*background-color: rgba(255,255,255,0.8);*/
 	margin-top: 0px;
 	margin-left: -3px;
 	padding-top: 1px;
@@ -797,11 +797,113 @@ body {
 	border: 1px solid black;
 	opacity: 0.95;
 	width: 300px;
-	height: 200px;
+	height: 300px;
 	left: 50%;
 	margin-left: -200px;
 	position: fixed;
 	z-index: 3;
-	padding: 10px;
+	padding-left: 10px;
+	padding-top: 5px;
+}
+/* ========================================================================== */
+/* Form   =================================================================== */
+.formInfo{
+	font-size: 10px;
+}
+.formTextbox{
+	height: 20px;
+	padding-left: 5px;
+	border: 1px solid gray;
+}
+/* ========================================================================== */
+/* Schedule ================================================================= */
+#weekDays {
+	width: 750px;
+	height:	20px;
+	margin-top: 0px;
+	margin-left: -3px;
+	border-left: 3px solid #d61180;
+	font-size: 9pt;
+}
+
+#weekDaysContent {
+	width: 723px;
+	height: 20px;
+	margin-left: 27px;
+}
+
+.weekDaysButton {
+	float: left;
+	width: 78px;
+	text-align: center;
+}
+
+#schedule {
+	width: 750px;
+	height: auto;
+	margin-top: 30px;
+	margin-left: -3px;
+	border-left: 3px solid #d61180;
+}
+
+#scheduleTable {
+	width: 723px;
+	height: auto;
+	margin-left: 27px;
+}
+
+#scheduleHeader {
+	width: 680px;
+	margin-left: 43px;
+	height: 30px;
+	/*background-color: Gray;*/
+}
+
+.classRoom {
+	float: left;
+	width: 160px;
+	text-align: Center;
+	font-family: "Myriad Pro";	
+	font-size: 11pt;
+	margin-left: 8px;
+	border-bottom: 2px solid #d61180;
+}
+
+#scheduleBackground {
+	width: 723px;
+	height: 520px;
+	background: url(img/schedule.png) no-repeat;
+}
+
+.classesA {
+	position: absolute;
+	width: 160px;
+	/*background-color: #d61180;*/
+	margin-left: 51px;
+	/*border: 2px solid White;*/
+}
+
+.classesB {
+	position: absolute;
+	width: 160px;
+	/*background-color: #d61180;*/
+	margin-left: 219px;
+	/*border: 2px solid White;*/
+}
+
+.classesC {
+	position: absolute;
+	width: 160px;
+	/*background-color: #d61180;*/
+	margin-left: 387px;
+	/*border: 2px solid White;*/
+}
+
+.classesD {
+	position: absolute;
+	width: 160px;
+	/*background-color: #d61180;*/
+	margin-left: 555px;
+	/*border: 2px solid White;*/
 }
 /* ========================================================================== */
