@@ -3,18 +3,18 @@
 function grayout() {
 	
 		$('#grayout').css({"display":"none"});
-		$('#loginForm').css({"display":"none"});
+		$('#registerForm').css({"display":"none"});
 		
-		$("#loginButton").click(function(){
+		$("#registerButton").click(function(){
 			$('#grayout').css({"display":""});
-			$('#loginForm').css({"display":""});
+			$('#registerForm').css({"display":""});
 			// $("body").css("overflow", "hidden");
 			resForm();
 		});
 		
 		$("#grayout").click(function(){
 			$('#grayout').css({"display":"none"});
-			$('#loginForm').css({"display":"none"});
+			$('#registerForm').css({"display":"none"});
 			
 		});
 		

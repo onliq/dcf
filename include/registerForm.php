@@ -1,8 +1,8 @@
 <div id="grayout">
 </div>
-<div id="loginForm">
-	<div id="loginForm_left">
-		<form id="logValForm" method="post">
+<div id="registerForm">
+	<div id="registerForm_left">
+		<form id="regValForm" method="post">
 			<p class="formLabel">Email:</p>
 			<input type="text" class="formTextbox" id="fname" name="fname" >
 			<br>
@@ -22,7 +22,7 @@
 		</form>
 	</div>
 	
-	<div id="loginForm_right">
+	<div id="registerForm_right">
 	</div>
 </div>
 
@@ -51,7 +51,7 @@ jQuery.validator.addMethod("checkUser", function(value, element) {
   return this.optional(element) || value != user;
 }, "Ten adres email jest już używany!");
 
-var validate = $("#logValForm").validate({
+var validate = $("#regValForm").validate({
 	errorPlacement: function(error, element) {
 		
 	    // if (element.attr("name") == "fname" ){ 
@@ -71,8 +71,10 @@ var validate = $("#logValForm").validate({
 	success: function(label) {
 		
 	    var l = label.attr("for");
-	    l='#'+l+"_label";
-	    $(l).html( "Ok" );
+	    l='#'+l;
+	    //$(l).css("border-color","#8e1556");
+	    l=l+"_label";
+	    $(l).html( "Ok" );    
 	    
 	},
 	rules: {

@@ -103,7 +103,7 @@
 		<?php include 'include/userStatus.php'; ?>
 		<!-- ------------------------------------------------------------------------ -->
 		<!-- Include loginForm ------------------------------------------------------ -->
-		<?php include 'include/loginForm.php'; ?>
+		<?php include 'include/registerForm.php'; ?>
 		<!-- ------------------------------------------------------------------------ -->
 		<!-- Include header --------------------------------------------------------- -->
 		<?php include 'include/header.php'; ?>

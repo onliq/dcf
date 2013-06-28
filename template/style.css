@@ -761,7 +761,7 @@ body {
 /* ========================================================================== */
 
 /* ========================================================================== */
-/* Login  =================================================================== */
+/* Login / Register  =================================================================== */
 
 #userTopBar{
 	width: 1000px;
@@ -774,7 +774,14 @@ body {
 	margin-left: 900px;
 	margin-right: 10px;
 	cursor: pointer;
-	font-weight: bold;
+	/*font-weight: bold;*/
+}
+
+#registerButton{
+	/*margin-left: 900px;
+	margin-right: 10px;*/
+	cursor: pointer;
+	/*font-weight: bold;*/
 }
 
 #grayout{
@@ -792,7 +799,7 @@ body {
     left: 0px;
 }
 
-#loginForm{
+#registerForm{
 	background: white;
 	border: 1px solid black;
 	opacity: 0.95;
@@ -807,12 +814,17 @@ body {
 	overflow: hidden;
 }
 
-#loginForm_left{
+#registerForm_left{
 	width: 200px;
     float:left; 
 }
 
-#loginForm_right{
+#registerForm_right{	
+	/*Flip horizontally*/
+	/*transform: scaleX(-1); 
+	filter: FlipH; 
+	-ms-filter: "FlipH"; */
+    
 	float:left; 
 	background-image: url(img/bgEye.png);
 	background-repeat:no-repeat;
@@ -832,6 +844,36 @@ body {
 	height: 20px;
 	padding-left: 5px;
 	border: 1px solid gray;
+}
+.formButton {
+	margin-top: 10px;
+	-moz-box-shadow:inset 0px 1px 0px 0px #525252;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #525252;
+	box-shadow:inset 0px 1px 0px 0px #525252;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d61181), color-stop(1, #8e1556) );
+	background:-moz-linear-gradient( center top, #d61181 5%, #8e1556 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d61181', endColorstr='#8e1556');
+	background-color:#d61181;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	border-radius:2px;
+	border:1px solid #050405;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #292929;
+}.formButton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8e1556), color-stop(1, #d61181) );
+	background:-moz-linear-gradient( center top, #8e1556 5%, #d61181 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8e1556', endColorstr='#d61181');
+	background-color:#8e1556;
+}.formButton:active {
+	position:relative;
+	top:1px;
 }
 /* ========================================================================== */
 /* Schedule ================================================================= */
