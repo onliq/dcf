@@ -15,10 +15,12 @@
 	
 	<!-- Functions -------------------------------------------------------------- -->	
 	<script type="text/javascript">
+	
+	
 	function getSchedule(date){
 		var date = date;
 		$.ajax({ 
-	    type: 'POST', 
+	    type: 'GET', 
 	    url: 'controllers/getSchedule.php', 
 	    data: {date: date},
 	    dataType: 'json',
@@ -52,19 +54,49 @@
 	    	}
 		});
 	}
+	
+	
+	function getURLParameter(name) {
+    	return decodeURI(
+        	(RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+    	);
+	}
+	
+	
+	function getCurrentDate() {
+		var d = new Date();
+
+		var month = d.getMonth()+1;
+		var day = d.getDate();
+	
+		var output = d.getFullYear() + '/' +
+	  	  (month<10 ? '0' : '') + month + '/' +
+	  	  (day<10 ? '0' : '') + day;
+		return output;	    
+	}
+
+
 	</script>
 	<!-- ------------------------------------------------------------------------ -->	
 
 	<!-- Page load -------------------------------------------------------------- -->
 	<script type="text/javascript">
 		$(document).ready(function(){
+			
 			grayout();
-			var date = new Date("2013/06/27");
-			var currentDay = date.getDate();
-			var currentMonth = date.getMonth();
-			var currentYear = date.getFullYear();
-			date = (currentYear + "/" + currentMonth + "/" + currentDay);
-			getSchedule(date);
+
+			if (window.location.search.indexOf('date') > -1) {
+				var date = getURLParameter("date");
+				getSchedule(date);
+			} else {
+			    var date = getCurrentDate();
+				getSchedule(date);
+			}
+			
+			$("#nextWeek").click(function(){
+				var date = getURLParameter("date");
+				nextWeek(date);
+			})
 		})
 	</script>
 	<!-- ------------------------------------------------------------------------ -->	
@@ -96,31 +128,29 @@
 							if (isset($_GET['date'])){
 								$dayOfWeek = date('l', strtotime($_GET['date']));
 								$date = date('Y/m/d', strtotime($_GET['date']));
-								// echo 'Date: ' . $date . '  Day: ' . $dayOfWeek;
 							}else{
 								$dayOfWeek = date("l");
 								$date = date("Y/m/d");
-								// echo 'Date: ' . $date . '  Day: ' . $dayOfWeek;
 							}
-							
-							echo ('<div class="weekDaysButton" id="prevWeek">&#171</div>');
+							echo ('<a href="schedule.php?date='); $datePrev = date('Y/m/d', strtotime($date . ' - 7 day')); echo $datePrev; echo ('">');
+							echo ('<div class="weekDaysButton" id="prevWeek">&#171</div></a>');
 							
 							switch($dayOfWeek){
 								
 								case ($dayOfWeek == 'Monday'):
 									echo ('<a href="schedule.php?date='); echo $date; echo ('">');
 									echo ('<div class="weekDaysButton" id="mon" style="border-bottom: 2px solid #d61180">Poniedziałek</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date2 = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date2; echo ('">');
 									echo ('<div class="weekDaysButton" id="tue">Wtorek</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date2 = date('Y/m/d', strtotime($date2 . ' + 1 day')); echo $date2; echo ('">');
 									echo ('<div class="weekDaysButton" id="wed">Środa</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date2 = date('Y/m/d', strtotime($date2 . ' + 1 day')); echo $date2; echo ('">');
 									echo ('<div class="weekDaysButton" id="thu">Czwartek</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date2 = date('Y/m/d', strtotime($date2 . ' + 1 day')); echo $date2; echo ('">');
 									echo ('<div class="weekDaysButton" id="fri">Piątek</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date2 = date('Y/m/d', strtotime($date2 . ' + 1 day')); echo $date2; echo ('">');
 									echo ('<div class="weekDaysButton" id="sat">Sobota</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date2 = date('Y/m/d', strtotime($date2 . ' + 1 day')); echo $date2; echo ('">');
 									echo ('<div class="weekDaysButton" id="sun">Niedziela</div></a>');
 									break;
 									
@@ -129,15 +159,15 @@
 									echo ('<div class="weekDaysButton" id="mon">Poniedziałek</div></a>');
 									echo ('<a href="schedule.php?date='); echo $date; echo ('">');
 									echo ('<div class="weekDaysButton" id="tue" style="border-bottom: 2px solid #d61180">Wtorek</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' +1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date3 = date('Y/m/d', strtotime($date . ' +1 day')); echo $date3; echo ('">');
 									echo ('<div class="weekDaysButton" id="wed">Środa</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date3 = date('Y/m/d', strtotime($date3 . ' + 1 day')); echo $date3; echo ('">');
 									echo ('<div class="weekDaysButton" id="thu">Czwartek</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date3 = date('Y/m/d', strtotime($date3 . ' + 1 day')); echo $date3; echo ('">');
 									echo ('<div class="weekDaysButton" id="fri">Piątek</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date3 = date('Y/m/d', strtotime($date3 . ' + 1 day')); echo $date3; echo ('">');
 									echo ('<div class="weekDaysButton" id="sat">Sobota</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date3 = date('Y/m/d', strtotime($date3 . ' + 1 day')); echo $date3; echo ('">');
 									echo ('<div class="weekDaysButton" id="sun">Niedziela</div></a>');
 									break;
 									
@@ -148,13 +178,13 @@
 									echo ('<div class="weekDaysButton" id="tue">Wtorek</div></a>');
 									echo ('<a href="schedule.php?date='); echo $date; echo ('">');
 									echo ('<div class="weekDaysButton" id="wed" style="border-bottom: 2px solid #d61180">Środa</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date3 = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date3; echo ('">');
 									echo ('<div class="weekDaysButton" id="thu">Czwartek</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date3 = date('Y/m/d', strtotime($date3 . ' + 1 day')); echo $date3; echo ('">');
 									echo ('<div class="weekDaysButton" id="fri">Piątek</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date3 = date('Y/m/d', strtotime($date3 . ' + 1 day')); echo $date3; echo ('">');
 									echo ('<div class="weekDaysButton" id="sat">Sobota</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date3 = date('Y/m/d', strtotime($date3 . ' + 1 day')); echo $date3; echo ('">');
 									echo ('<div class="weekDaysButton" id="sun">Niedziela</div></a>');
 									break;
 									
@@ -167,11 +197,11 @@
 									echo ('<div class="weekDaysButton" id="wed">Środa</div></a>');
 									echo ('<a href="schedule.php?date='); echo $date; echo ('">');
 									echo ('<div class="weekDaysButton" id="thu" style="border-bottom: 2px solid #d61180">Czwartek</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date3 = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date3; echo ('">');
 									echo ('<div class="weekDaysButton" id="fri">Piątek</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date3 = date('Y/m/d', strtotime($date3 . ' + 1 day')); echo $date3; echo ('">');
 									echo ('<div class="weekDaysButton" id="sat">Sobota</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date3 = date('Y/m/d', strtotime($date3 . ' + 1 day')); echo $date3; echo ('">');
 									echo ('<div class="weekDaysButton" id="sun">Niedziela</div></a>');
 									break;
 									
@@ -186,9 +216,9 @@
 									echo ('<div class="weekDaysButton" id="thu">Czwartek</div></a>');
 									echo ('<a href="schedule.php?date='); echo $date; echo ('">');
 									echo ('<div class="weekDaysButton" id="fri" style="border-bottom: 2px solid #d61180">Piątek</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date3 = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date3; echo ('">');
 									echo ('<div class="weekDaysButton" id="sat">Sobota</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date3 = date('Y/m/d', strtotime($date3 . ' + 1 day')); echo $date3; echo ('">');
 									echo ('<div class="weekDaysButton" id="sun">Niedziela</div></a>');
 									break;
 									
@@ -205,7 +235,7 @@
 									echo ('<div class="weekDaysButton" id="fri">Piątek</div></a>');
 									echo ('<a href="schedule.php?date='); echo $date; echo ('">');
 									echo ('<div class="weekDaysButton" id="sat" style="border-bottom: 2px solid #d61180">Sobota</div></a>');
-									echo ('<a href="schedule.php?date='); $date = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date; echo ('">');
+									echo ('<a href="schedule.php?date='); $date3 = date('Y/m/d', strtotime($date . ' + 1 day')); echo $date3; echo ('">');
 									echo ('<div class="weekDaysButton" id="sun">Niedziela</div></a>');
 									break;
 									
@@ -227,18 +257,11 @@
 									break;
 							}
 							
-							echo ('<div class="weekDaysButton" id="nextWeek">&#187</div>');
+							echo ('<a href="schedule.php?date='); $dateNext = date('Y/m/d', strtotime($date . ' + 7 day')); echo $dateNext; echo ('">');
+							echo ('<div class="weekDaysButton" id="nextWeek">&#187</div></a>');
 							
 						?>
-						<!-- <div class="weekDaysButton" id="prevWeek">&#171</div>
-						<div class="weekDaysButton" id="mon">Poniedziałek</div>
-						<div class="weekDaysButton" id="tue">Wtorek</div>
-						<div class="weekDaysButton" id="wed">Środa</div>
-						<div class="weekDaysButton" id="thu">Czwartek</div>
-						<div class="weekDaysButton" id="fri">Piątek</div>
-						<div class="weekDaysButton" id="sat">Sobota</div>
-						<div class="weekDaysButton" id="sun">Niedziela</div>
-						<div class="weekDaysButton" id="nextWeek">&#187</div> -->
+					
 					</div>
 				</div>
 				<div id="schedule">

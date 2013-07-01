@@ -4,7 +4,7 @@
 
 
 // Vars /////////////////////////////////////////////////////////////////////////////////////////////// //
-$day = date('l', strtotime($_POST['date']));
+$day = date('l', strtotime($_GET['date']));
 
 switch($day){
 	case($day == "Monday"):
@@ -45,7 +45,6 @@ if (mysqli_connect_errno())
 	}
 
 
-
 $result = mysqli_query($conn,"SELECT * FROM static_schedule WHERE  day = '$day' AND start >= '16:00:00' AND end <= '22:00:00' ORDER BY room, start");
 
 if (!$result) {
@@ -54,9 +53,7 @@ if (!$result) {
 }
 
 while($e=mysqli_fetch_assoc($result))
-
               $output[]=$e;
-
            print(json_encode($output));
 // //////////////////////////////////////////////////////////////////////////////////////////////////// //	
 
