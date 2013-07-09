@@ -16,14 +16,157 @@
 	<!-- Functions -------------------------------------------------------------- -->	
 	<script type="text/javascript">
 	
+	// Loading instructors dropdown list
+	function loadInstructorsList(){
+			$.ajax({
+					url: "controllers/getInstructorsList.php",
+					type: "POST",
+					cache: false
+					}).done(function(data) {
+			  		$("#instructors").html(data);
+			  		if(window.location.search.indexOf('instructor') < 0){ // if no instructor param - load default classes list
+						loadClassesList2(0);
+					}else{
+						var iName = getURLParameter("instructor"); // if instructor param exists - set correct option as selected, and load proper classes list
+						var value = $('#selectInstructors option').filter(function () { return $(this).html() == iName; }).val();
+						$('#selectInstructors option[value="' + value + '"]').prop('selected', true);
+						loadClassesList2(value)
+					}
+					loadClassesList1(); // load on_select_change function
+				});
+	}
 	
-	function getSchedule(date){
+	// Change classes dropdown list on instructor change
+	function loadClassesList1(){
+		$("#selectInstructors").on("change", function(){
+			$("#selectInstructors option:selected").each(function () {
+	            var id = $(this).attr("value");
+	            if(id == 0){ // controlls proper classes lists displaying
+	            	$("#classes1").hide();
+	            	$("#classes2").show();
+	            	loadClassesList2(0);
+	            }else{
+	            	$("#classes1").show();
+	            	$("#classes2").hide();
+		            $.ajax({ // loading classes list
+								url: "controllers/getClassesList.php",
+								type: "POST",
+								data:  {instructorId: id},
+								cache: false
+								}).done(function(data) {
+						  		$("#classes1").html(data);
+							});
+						}
+	  			});	
+			})
+	}
+	
+	// Startup default classes dropdownlist
+	function loadClassesList2(id){
+            $.ajax({
+						url: "controllers/getClassesList.php",
+						type: "POST",
+						data: {instructorId: id},
+						cache: false
+						}).done(function(data) {
+				  		$("#classes2").html(data);
+				  		if(window.location.search.indexOf('classes') < 0){
+									
+						}else{ // Setting proper option as selected
+							var classes = getURLParameter("classes");
+							var value2 = $('#selectClasses option').filter(function () { return $(this).html() == classes; }).val();
+							$('#selectClasses option[value="' + value2 + '"]').prop('selected', true);
+						}
+				  });
+	}
+		
+		
+			
+	// function setStartupFilters(){
+		// loadInstructorsList();
+		// var test = $("#selectInstructors option:selected").html();
+		// alert(test);
+		// if($("#selectInstructors option:selected").html() == "Wszyscy instruktorzy"){
+			// alert("Asd");
+			// loadClassesList1();
+		// }else{
+			// alert("222");
+		// }
+	// }
+	
+	
+	// Change filtering on button click
+	function filter(){
+		$("#filterButton").click(function(){
+			
+			var date = getCurrentDate();
+			var instructor = $("#selectInstructors option:selected").html();
+			var classes = $("#selectClasses option:selected").html();
+			
+			$("#drawSchedule").html("");
+			
+			if(instructor == "Wszyscy instruktorzy" && classes == "Wszystkie zajęcia"){
+				// alert("opt1");
+				window.location.replace('schedule.php?date=' + date);
+			}else{
+				if(instructor != "Wszyscy instruktorzy" && classes == "Wszystkie zajęcia"){
+				// alert("opt2");
+				window.location.replace('schedule.php?date=' + date + '&instructor=' + instructor);
+				}else{
+					if(instructor == "Wszyscy instruktorzy" && classes != "Wszystkie zajęcia"){
+					// alert("opt3");
+					window.location.replace('schedule.php?date=' + date + '&classes=' + classes);
+					}else{
+						if(instructor != "Wszyscy instruktorzy" && classes != "Wszystkie zajęcia"){
+							// alert("opt4");
+							window.location.replace('schedule.php?date=' + date + '&instructor=' + instructor + '&classes=' + classes);
+						}else{
+							// alert("opt5");		
+						}
+					}
+				}
+			}
+		})
+	}
+	
+	
+	// Checking if filters params exists in URL
+	function inCaseGetSchedule(){
+		var date = getCurrentDate();
+		if(window.location.search.indexOf('instructor') < 0 && window.location.search.indexOf('classes') < 0){
+			    	getSchedule(date);
+			}else{
+					if(window.location.search.indexOf('instructor') > -1 && window.location.search.indexOf('classes') < 0){
+						var instructor = getURLParameter("instructor");
+						getSchedule(date, instructor);
+					}else{
+						if(window.location.search.indexOf('instructor') < 0 && window.location.search.indexOf('classes') > -1){
+							var classes = getURLParameter("classes");
+							getSchedule(date, instructor, classes);
+						}else{
+							if(window.location.search.indexOf('instructor') > -1 && window.location.search.indexOf('classes') > -1){
+								var instructor = getURLParameter("instructor");
+								var classes = getURLParameter("classes");
+								getSchedule(date, instructor, classes);
+							}
+							}
+						}
+				}		
+	}
+	
+	
+	// Drawing schedule on screen
+	function getSchedule(date, instructor, classes){
 		var date = date;
 		$.ajax({ 
 	    type: 'GET', 
 	    url: 'controllers/getSchedule.php', 
-	    data: {date: date},
+	    data: {date: date, scheduleMode: "normal", instructor: instructor, classes: classes},
 	    dataType: 'json',
+	    error: function (data) {
+	    	loadInstructorsList();
+			loadClassesList2();
+	    },
 	    success: function (data) { 
 	    	var color = 0;
 			$.each(data,function(i,row){
@@ -33,7 +176,7 @@
 			   	var endHour = row.end.substr(0,2);
 			   	var endMinute = row.end.substr(3,2);
 			   	
-				$("#scheduleBackground").append(
+				$("#drawSchedule").append(
 				   	"<div class='classes" + row.room + "' id='class" + row.id + "'>" + row.name + "</div>"
 				);
 				
@@ -55,24 +198,29 @@
 		});
 	}
 	
-	
+	// Getting URL parameters
 	function getURLParameter(name) {
     	return decodeURI(
         	(RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
     	);
 	}
 	
-	
+	// Getting current date
 	function getCurrentDate() {
-		var d = new Date();
+		
+		if(window.location.search.indexOf('date') > -1){
+			var date = getURLParameter("date");
+		}else{
+			var d = new Date();
 
-		var month = d.getMonth()+1;
-		var day = d.getDate();
+			var month = d.getMonth()+1;
+			var day = d.getDate();
 	
-		var output = d.getFullYear() + '/' +
-	  	  (month<10 ? '0' : '') + month + '/' +
-	  	  (day<10 ? '0' : '') + day;
-		return output;	    
+			var date = d.getFullYear() + '/' +
+	  	  	(month<10 ? '0' : '') + month + '/' +
+	  	  	(day<10 ? '0' : '') + day;    
+		}
+		return date;	
 	}
 
 
@@ -84,19 +232,16 @@
 		$(document).ready(function(){
 			
 			grayout();
-
-			if (window.location.search.indexOf('date') > -1) {
-				var date = getURLParameter("date");
-				getSchedule(date);
-			} else {
-			    var date = getCurrentDate();
-				getSchedule(date);
-			}
 			
-			$("#nextWeek").click(function(){
-				var date = getURLParameter("date");
-				nextWeek(date);
-			})
+			loadInstructorsList();
+			inCaseGetSchedule();
+			filter();
+			
+			// setStartupFilters();
+			// loadClassesList1();
+			// setFilters();
+			// getSchedule('2013/07/01', 'Klaudia Nierodzik')
+			
 		})
 	</script>
 	<!-- ------------------------------------------------------------------------ -->	
@@ -120,6 +265,36 @@
 			
 			
 			<div id="rightCol">
+				<div id="scheduleOptionsContent"> 
+					<div id="scheduleOptions">
+						<div id="pickScheduleType">
+							<?php
+								echo ("Rozkład: ");
+								if (isset($_GET['date'])){
+									$date = date('Y/m/d', strtotime($_GET['date']));
+									echo ('<a href="schedule.php?date='); echo ($date); echo ('">Standardowy</a>');
+									echo ('<a href="extSchedule.php?date='); echo ($date); echo ('">Rozszerzony</a>');
+								}else{
+									echo ('<a href="schedule.php">Standardowy</a>
+											<a href="extSchedule.php">Rozszerzony</a>');
+								}
+								if (isset($_GET['date'])){
+									$date = date('Y/m/d', strtotime($_GET['date']));
+									echo ('<a href="schedule.php?date='); echo ($date); echo('&room=A'); echo ('">Filtr: Sala A</a>');
+								}else{
+									echo ('<a href="schedule.php?room=A">Filtr: Sala A</a>');
+								}
+								
+							?>
+						</div>
+						<div id="filterOptions">
+							<div id="instructors"></div>
+							<div id="classes1"></div>
+							<div id="classes2"></div>
+							<input type="button" id="filterButton" value="Filter" />
+						</div>
+					</div>
+				</div>
 				<div id="weekDays">
 					<div id="weekDaysContent">
 						
@@ -265,14 +440,59 @@
 					</div>
 				</div>
 				<div id="schedule">
-					<div id="scheduleTable">
+					<div id="scheduleContent">
 						<div id="scheduleHeader">
 							<div class="classRoom" id="salaA">A</div>
 							<div class="classRoom" id"salaB">B</div>
 							<div class="classRoom" id="salaC">C</div>
 							<div class="classRoom" id="salaD">D</div>
 						</div>
-						<div id="scheduleBackground"></div>
+						<div id="scheduleTable">
+							<table class="hoursTableLeft">
+								<?php
+									function hours() {
+										$hoursList = array("16: 00", "16: 15", "16: 30", "16: 45", "17: 00", "17:15", "17: 30", "17: 45", "18: 00", "18: 15", 
+															"18: 30", "18: 45", "19: 00", "19: 15", "19: 30", "19: 45", "20: 00", "20: 15", "20: 30", "20: 45", 
+															"21: 00", "21: 15", "21: 30", "21: 45", "22: 00",);
+										for ($i = 0; $i < 25; $i ++) {
+											echo ('<tr><td class="hours">');
+											echo ($hoursList[$i]);
+											echo ('</td></tr>');
+											}
+									}
+								hours();
+								?>
+								
+							</table>
+							<?php
+							echo ("<table class='sTable'>");
+								for($i = 0; $i < 13; $i++) {
+									echo ('<tr class="rows">
+												<td class="td01"></td>
+												<td class="td1"></td>
+												<td class="td1"></td>
+												<td class="td1"></td>
+												<td class="td1"></td>
+											</tr>
+											<tr class="rows">
+												<td class="td02"></td>
+												<td class="td2"></td>
+												<td class="td2"></td>
+												<td class="td2"></td>
+												<td class="td2"></td>
+											</tr>'
+										);
+								}
+								echo ("</table>");
+							?>
+							
+							<table class="hoursTableRight">
+								<?php
+								hours();
+								?>
+							</table>
+							<div id="drawSchedule"></div>
+						</div>
 					</div>
 				</div>
 				
